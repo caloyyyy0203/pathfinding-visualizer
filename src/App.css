@@ -1,0 +1,168 @@
+@font-face {
+  font-family: 'PrStart';
+  src: url('./assets/fonts/PrStart.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.App {
+  font-family: 'PrStart', sans-serif;
+  text-align: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  overflow: auto;
+}
+
+.controls { 
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-bottom: 20px;
+  width: 20%;
+  height: 500px;;
+  padding: 20px;
+  background-color: #ff914d;
+  border: 10px solid #7e3101;
+  border-radius: 10px;
+  align-items: stretch;
+}
+
+.controlHeading {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 10px;
+  color: black;
+}
+
+label {
+  color: black;
+  padding: 10px
+}
+
+.setControls {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.setControls button {
+  font-family: 'PrStart', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: #0cc0df;
+}
+
+.colorBox {
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000;
+  margin: 3px;
+  margin-bottom: 5px;;
+}
+
+.colorBox.start {
+  background-color: green;
+}
+
+.colorBox.end {
+  background-color: red;
+}
+
+.colorBox.wall {
+  background-color: black;
+}
+
+.randomizer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0px;
+}
+
+.randomizer button {
+  font-family: 'PrStart', sans-serif;
+  background-color: #0cc0df;
+}
+
+.speed, .resizeGrid {
+  display: flex;
+}
+
+.controls button {
+  margin-right: 0px;
+  padding:12px;
+  cursor: pointer;
+  width: 100%;
+  border: 3px solid black;
+  border-radius: 10px;
+}
+
+.findPath {
+  font-family: 'PrStart', sans-serif;
+  font-size: 1rem;
+  background-color: #7ed957;
+  margin-bottom: 10px;
+}
+
+.reset {
+  font-family: 'PrStart', sans-serif;
+  background-color: #ff3131;
+  margin-top: 10px;
+}
+
+.grid-pair {
+  display: flex;
+  flex: 3.5;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.algoName {
+  background-color: #ffe500;
+  border: 7px solid #6c5600;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 2rem;
+  color: #000;
+  width: fit-content;
+  margin: 10px auto;
+}
+
+.video-wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: auto;
+}
+
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.extraLayer {
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.app-container {
+  font-family: 'PrStart', sans-serif;
+  display: flex;
+  z-index: 1;
+  padding: 30px;
+  color: #fff; 
+}

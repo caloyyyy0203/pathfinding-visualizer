@@ -1,0 +1,19 @@
+.visualizer {
+  padding: 1rem;
+}
+
+.controls {
+  margin-bottom: 1rem;
+}
+
+.controls button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.grids {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+}
