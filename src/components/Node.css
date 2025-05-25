@@ -4,6 +4,13 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+.node:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  cursor: pointer;
+}
+
 .size-10 {
   width: 40px;
   height: 40px;
@@ -18,8 +25,6 @@
   width: 20px;
   height: 20px;
 }
-
-
 
 .node.wall {
   background-color: black;

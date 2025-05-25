@@ -26,6 +26,7 @@
   border: 10px solid #7e3101;
   border-radius: 10px;
   align-items: stretch;
+  user-select: none;
 }
 
 .controlHeading {
@@ -37,7 +38,8 @@
 
 label {
   color: black;
-  padding: 10px
+  padding: 10px;
+  padding-right: 0;
 }
 
 .setControls {
@@ -80,6 +82,17 @@ label {
   background-color: black;
 }
 
+.setControls button.active {
+  background-color: #4caf50; 
+  color: white;
+  border: 4px solid #000; 
+  transform: scale(1.03);
+}
+
+.setControls button:disabled {
+  opacity: 0.5; 
+}
+
 .randomizer {
   display: flex;
   flex-direction: column;
@@ -94,6 +107,58 @@ label {
 
 .speed, .resizeGrid {
   display: flex;
+}
+
+.speed {
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+  font-size: 1rem;
+  font-family: 'PrStart', sans-serif;
+  color: black;
+}
+
+.speed label {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.speed select {
+  font-family: 'PrStart', sans-serif;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.resizeGrid {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  font-family: 'PrStart', sans-serif;
+  color: black;
+}
+
+.resizeGrid label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.resizeGrid select {
+  font-family: 'PrStart', sans-serif;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 0.5rem;
+  margin-left: 0;
 }
 
 .controls button {
@@ -118,6 +183,25 @@ label {
   margin-top: 10px;
 }
 
+.controls button:hover,
+.setControls button:hover,
+.randomizer button:hover,
+.findPath:hover,
+.reset:hover {
+  filter: brightness(1.1);
+  transform: scale(1.03);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.speed select:hover,
+.resizeGrid select:hover {
+  filter: brightness(1.05);
+  transform: scale(1.03);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
 .grid-pair {
   display: flex;
   flex: 3.5;
@@ -130,10 +214,11 @@ label {
   border: 7px solid #6c5600;
   border-radius: 10px;
   padding: 10px 20px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #000;
   width: fit-content;
   margin: 10px auto;
+  user-select: none;
 }
 
 .video-wrapper {
@@ -165,4 +250,7 @@ label {
   z-index: 1;
   padding: 30px;
   color: #fff; 
+  height: 85vh;
+  justify-content: center;
+  align-items: center;
 }

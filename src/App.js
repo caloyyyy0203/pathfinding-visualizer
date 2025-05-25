@@ -28,7 +28,7 @@ const createEmptyGrid = (rows, cols) => {
 
 function App() {
   const [grid, setGrid] = useState([]);
-  const [mode, setMode] = useState("wall");
+  const [mode, setMode] = useState(null);
   const [gridDijkstra, setGridDijkstra] = useState([]);
   const [gridAStar, setGridAStar] = useState([]);
   const [metrics, setMetrics] = useState(null);
@@ -55,19 +55,16 @@ function App() {
     const cell = newGrid[row][col];
 
     if (mode === "wall") {
-      // Toggle wall only if cell is not start/end
       if (!cell.isStart && !cell.isEnd) {
         cell.isWall = !cell.isWall;
       }
     } else if (mode === "start") {
       if (!cell.isEnd && !cell.isWall) {
-        // Clear existing start
         newGrid.forEach((r) => r.forEach((c) => (c.isStart = false)));
         cell.isStart = true;
       }
     } else if (mode === "end") {
       if (!cell.isStart && !cell.isWall) {
-        // Clear existing end
         newGrid.forEach((r) => r.forEach((c) => (c.isEnd = false)));
         cell.isEnd = true;
       }
@@ -89,7 +86,6 @@ function App() {
       }))
     );
 
-    // Pick new random start
     const startRow = Math.floor(Math.random() * rows);
     const startCol = Math.floor(Math.random() * cols);
 
@@ -118,13 +114,11 @@ function App() {
       }))
     );
 
-    // Place walls randomly (e.g., 20% chance)
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const cell = newGrid[row][col];
-        // Skip start/end cells
         if (!cell.isStart && !cell.isEnd) {
-          cell.isWall = Math.random() < 0.2; // 20% chance
+          cell.isWall = Math.random() < 0.2;
         }
       }
     }
@@ -136,16 +130,14 @@ function App() {
   };
 
   const handleResetGrid = () => {
-    // 1. Stop any ongoing animation
     setIsAnimating(false);
+    setMode(null);
 
-    // 2. Optional: Clear animation timeouts if you use them in animatePathfinding
     if (window.animationTimeouts) {
       window.animationTimeouts.forEach(clearTimeout);
       window.animationTimeouts = [];
     }
 
-    // 3. Create and set a fresh grid
     const newGrid = createEmptyGrid(rows, cols);
 
     setGrid(newGrid);
@@ -175,7 +167,6 @@ function App() {
       )
     );
 
-    // 4. Reset metrics
     setMetrics(null);
   };
 
@@ -186,7 +177,6 @@ function App() {
     }
     setIsAnimating(true); // 🔒 Block UI actions
 
-    // Reset visited and path flags on dijkstra grid
     const resetDijkstraGrid = gridDijkstra.map((row) =>
       row.map((cell) => ({
         ...cell,
@@ -195,7 +185,6 @@ function App() {
       }))
     );
 
-    // Reset visited and path flags on A* grid
     const resetAStarGrid = gridAStar.map((row) =>
       row.map((cell) => ({
         ...cell,
@@ -247,11 +236,9 @@ function App() {
         },
       });
 
-      // Animate pathfinding
       animatePathfinding(dVisited, dPath, "dijkstra");
       animatePathfinding(aVisited, aPath, "astar");
 
-      // 🔽 Calculate animation duration and unlock UI after
       const dijkstraTotalTime =
         speedMap[animationSpeed] * dVisited.length +
         speedMap[animationSpeed] * dPath.length;
@@ -263,16 +250,14 @@ function App() {
       const longestDuration = Math.max(dijkstraTotalTime, aStarTotalTime);
 
       setTimeout(() => {
-        setIsAnimating(false); // 🔓 Unlock UI after animation
+        setIsAnimating(false);
       }, longestDuration);
     }, 0);
   };
 
-  // Animations for both grids
   const animatePathfinding = (visitedNodes, shortestPath, algorithm) => {
     if (!window.animationTimeouts) window.animationTimeouts = [];
 
-    // Clone the appropriate grid once at the start
     let baseGrid =
       algorithm === "dijkstra"
         ? gridDijkstra.map((row) =>
@@ -296,7 +281,6 @@ function App() {
       window.animationTimeouts.push(timeoutId);
     });
 
-    // Animate shortest path after visited nodes
     const pathTimeoutId = setTimeout(() => {
       animateShortestPath(shortestPath, algorithm);
     }, speedMap[animationSpeed] * visitedNodes.length);
@@ -309,37 +293,34 @@ function App() {
       window.animationTimeouts = [];
     }
 
-    // Step 1: Clone and clear .isPath from the current grid
     let animationGrid =
       algorithm === "dijkstra"
         ? gridDijkstra.map((row) =>
             row.map((cell) => ({
               ...cell,
-              isPath: false, // Clear any previous path
+              isPath: false,
             }))
           )
         : gridAStar.map((row) =>
             row.map((cell) => ({
               ...cell,
-              isPath: false, // Clear any previous path
+              isPath: false,
             }))
           );
 
-    // Step 2: Immediately update the grid with cleared path
     if (algorithm === "dijkstra") {
       setGridDijkstra(animationGrid);
     } else {
       setGridAStar(animationGrid);
     }
 
-    // Step 3: Begin animation from clean state
     for (let i = 0; i < nodes.length; i++) {
       const timeoutId = setTimeout(() => {
         const node = nodes[i];
         animationGrid[node.row][node.col].isPath = true;
 
         if (algorithm === "dijkstra") {
-          setGridDijkstra([...animationGrid]); // force new state
+          setGridDijkstra([...animationGrid]);
         } else {
           setGridAStar([...animationGrid]);
         }
@@ -351,120 +332,150 @@ function App() {
 
   return (
     <div className="video-wrapper">
-      <div className="extraLayer"> 
+      <div className="extraLayer">
         <video autoPlay loop muted className="background-video">
-        <source src="/background.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+          <source src="/background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
-      <div className="app-container">
-        <div className="controls">
-          <h2 className="controlHeading">CONTROLS</h2>
-          <label>Set:</label>
-          <div className="setControls">
-            <button onClick={() => setMode("start")} disabled={isAnimating}>
-              <div className="colorBox start"></div>
-              Start
-            </button>
-            <button onClick={() => setMode("end")} disabled={isAnimating}>
-              <div className="colorBox end"></div>
-              Goal
-            </button>
-            <button onClick={() => setMode("wall")} disabled={isAnimating}>
-              <div className="colorBox wall"></div>
-              Wall
-            </button>
-          </div>
-          <div className="randomizer">
-            <button onClick={handleRandomizeStartEnd} disabled={isAnimating}>
-              Randomize Start/End
-            </button>
-            <button onClick={handleRandomizeWalls} disabled={isAnimating}>
-              Randomize Walls
-            </button>
-          </div>
-          <button className="findPath" onClick={handleFindPath} disabled={isAnimating}>
-            FIND PATH
-          </button>
+        <div className="app-container">
+          <div className="controls">
+            <h2 className="controlHeading">CONTROLS</h2>
+            <label>Set:</label>
+            <div className="setControls">
+              <button
+                onClick={() => setMode("start")}
+                disabled={isAnimating}
+                className={mode === "start" ? "active" : ""}
+              >
+                <div className="colorBox start"></div>
+                Start
+              </button>
+              <button
+                onClick={() => setMode("end")}
+                disabled={isAnimating}
+                className={mode === "end" ? "active" : ""}
+              >
+                <div className="colorBox end"></div>
+                Goal
+              </button>
+              <button
+                onClick={() => setMode("wall")}
+                disabled={isAnimating}
+                className={mode === "wall" ? "active" : ""}
+              >
+                <div className="colorBox wall"></div>
+                Wall
+              </button>
+            </div>
 
-          <div className="speed">
-            <label htmlFor="speed">Speed: </label>
-            <select
-              id="speed"
-              value={animationSpeed}
-              onChange={(e) => setAnimationSpeed(e.target.value)}
+            <div className="randomizer">
+              <button
+                onClick={() => {
+                  setMode(null);
+                  handleRandomizeStartEnd();
+                }}
+                disabled={isAnimating}
+              >
+                Randomize Start/End
+              </button>
+              <button
+                onClick={() => {
+                  setMode(null);
+                  handleRandomizeWalls();
+                }}
+                disabled={isAnimating}
+              >
+                Randomize Walls
+              </button>
+            </div>
+            <button
+              className="findPath"
+              onClick={() => {
+                setMode(null);
+                handleFindPath();
+              }}
               disabled={isAnimating}
             >
-              <option value="Slow">Slow</option>
-              <option value="Normal">Normal</option>
-              <option value="Fast">Fast</option>
-            </select>
-          </div>
+              FIND PATH
+            </button>
 
-          <div className="resizeGrid">
-            <label>
-              Rows:
+            <div className="speed">
+              <label htmlFor="speed">Speed: </label>
               <select
-                value={rows}
-                onChange={(e) => {
-                  setRows(Number(e.target.value));
-                  setMetrics(null);
-                }}
+                id="speed"
+                value={animationSpeed}
+                onChange={(e) => setAnimationSpeed(e.target.value)}
                 disabled={isAnimating}
               >
-                {[10, 15, 20].map((n) => (
-                  <option key={n} value={n}>
-                    {n}
-                  </option>
-                ))}
+                <option value="Slow">Slow</option>
+                <option value="Normal">Normal</option>
+                <option value="Fast">Fast</option>
               </select>
-            </label>
+            </div>
 
-            <label>
-              Columns:
-              <select
-                value={cols}
-                onChange={(e) => {
-                  setCols(Number(e.target.value));
-                  setMetrics(null);
-                }}
-                disabled={isAnimating}
-              >
-                {[10, 15, 20].map((n) => (
-                  <option key={n} value={n}>
-                    {n}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <div className="resizeGrid">
+              <label>
+                Rows:
+                <select
+                  value={rows}
+                  onChange={(e) => {
+                    setRows(Number(e.target.value));
+                    setMetrics(null);
+                  }}
+                  disabled={isAnimating}
+                >
+                  {Array.from({ length: 11 }, (_, i) => 10 + i).map(
+                    (n) => (<option key={n} value={n}>{n}</option>)
+                  )}
+                </select>
+              </label>
+
+              <label>
+                Columns:
+                <select
+                  value={cols}
+                  onChange={(e) => {
+                    setCols(Number(e.target.value));
+                    setMetrics(null);
+                  }}
+                  disabled={isAnimating}
+                >
+                  {Array.from({ length: 11 }, (_, i) => 10 + i).map(
+                    (n) => (<option key={n} value={n}>{n}</option>)
+                  )}
+                </select>
+              </label>
+            </div>
+
+            <button className="reset" onClick={handleResetGrid}>
+              RESET
+            </button>
           </div>
 
-          <button className="reset" onClick={handleResetGrid}>Reset</button>
+          <div className="grid-pair">
+            <div>
+              <div className="algoName">Dijkstra's <br /> Algorithm</div>
+              <Grid
+                grid={gridDijkstra}
+                onCellClick={handleCellClick}
+                metrics={!isAnimating ? metrics?.dijkstra : null}
+                cols={cols}
+                rows={rows}
+              />
+            </div>
+            <div>
+              <div className="algoName">A Star <br /> Algorithm</div>
+              <Grid
+                grid={gridAStar}
+                onCellClick={handleCellClick}
+                metrics={!isAnimating ? metrics?.aStar : null}
+                cols={cols}
+                rows={rows}
+              />
+            </div>
+          </div>
         </div>
-
-        <div className="grid-pair">
-          <div>
-            <div className="algoName">Dijkstra's <br /> Algorithm</div>
-            <Grid
-              grid={gridDijkstra}
-              onCellClick={handleCellClick}
-              metrics={metrics?.dijkstra}
-              cols={cols}
-              rows={rows}
-            />
-          </div>
-          <div>
-            <div className="algoName">A Star <br /> Algorithm</div>
-            <Grid
-              grid={gridAStar}
-              onCellClick={handleCellClick}
-              metrics={metrics?.aStar}
-              cols={cols}
-              rows={rows}
-            />
-          </div>
-        </div>
-      </div>
       </div>
     </div>
   );
