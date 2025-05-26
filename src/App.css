@@ -17,10 +17,9 @@
 .controls { 
   display: flex;
   flex-direction: column;
-  flex: 1;
-  margin-bottom: 20px;
-  width: 20%;
-  height: 500px;;
+  /* flex: 1; */
+  /* width: 20%; */
+  min-width: 16rem;
   padding: 20px;
   background-color: #ff914d;
   border: 10px solid #7e3101;
@@ -204,9 +203,11 @@ label {
 
 .grid-pair {
   display: flex;
-  flex: 3.5;
-  justify-content: space-evenly;
+  /* flex: 3.5; */
+  justify-content: space-around;
   text-align: center;
+  gap: 2vw;
+  padding: 0 1rem;
 }
 
 .algoName {
@@ -249,8 +250,9 @@ label {
   display: flex;
   z-index: 1;
   padding: 30px;
+  gap: 0.5rem;
   color: #fff; 
   height: 85vh;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
