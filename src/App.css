@@ -20,10 +20,10 @@
   /* flex: 1; */
   /* width: 20%; */
   min-width: 16rem;
-  padding: 20px;
+  padding: 1.25rem;
   background-color: #ff914d;
-  border: 10px solid #7e3101;
-  border-radius: 10px;
+  border: 0.625rem solid #7e3101;
+  border-radius: 0.625rem;
   align-items: stretch;
   user-select: none;
 }
@@ -31,13 +31,13 @@
 .controlHeading {
   text-align: center;
   margin: 0;
-  padding-bottom: 10px;
+  padding-bottom: 0.625rem;
   color: black;
 }
 
 label {
   color: black;
-  padding: 10px;
+  padding: 0.625rem;
   padding-right: 0;
 }
 
@@ -45,7 +45,7 @@ label {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  gap: 5px;
+  gap: 0.3125rem;
   margin: 0;
   padding: 0;
 }
@@ -62,11 +62,11 @@ label {
 
 .colorBox {
   align-items: center;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #000;
-  margin: 3px;
-  margin-bottom: 5px;;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 0.0625rem solid #000;
+  margin: 0.1875rem;
+  margin-bottom: 0.3125rem;
 }
 
 .colorBox.start {
@@ -84,7 +84,7 @@ label {
 .setControls button.active {
   background-color: #4caf50; 
   color: white;
-  border: 4px solid #000; 
+  border: 0.25 solid #000; 
   transform: scale(1.03);
 }
 
@@ -95,8 +95,8 @@ label {
 .randomizer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 10px 0px;
+  gap: 0.625rem;
+  margin: 0.625rem 0rem;
 }
 
 .randomizer button {
@@ -110,8 +110,8 @@ label {
 
 .speed {
   align-items: center;
-  margin-top: 10px;
-  gap: 10px;
+  margin-top: 0.625rem;
+  gap: 0.625rem;
   font-size: 1rem;
   font-family: 'PrStart', sans-serif;
   color: black;
@@ -125,17 +125,17 @@ label {
 .speed select {
   font-family: 'PrStart', sans-serif;
   background-color: #ffffff;
-  border: 2px solid #000;
-  border-radius: 5px;
-  padding: 5px 10px;
+  border: 0.125rem solid #000;
+  border-radius: 0.3125rem;
+  padding: 0.3125rem 0.625rem;
   font-size: 1rem;
   cursor: pointer;
 }
 
 .resizeGrid {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 0.625rem;
+  margin-top: 0.625rem;
   font-family: 'PrStart', sans-serif;
   color: black;
 }
@@ -150,9 +150,9 @@ label {
 .resizeGrid select {
   font-family: 'PrStart', sans-serif;
   background-color: #ffffff;
-  border: 2px solid #000;
-  border-radius: 5px;
-  padding: 5px 10px;
+  border: 0.125rem solid #000;
+  border-radius: 0.3125rem;
+  padding: 0.3125rem 0.625rem;
   font-size: 1rem;
   cursor: pointer;
   width: fit-content;
@@ -161,25 +161,25 @@ label {
 }
 
 .controls button {
-  margin-right: 0px;
-  padding:12px;
+  margin-right: 0rem;
+  padding: 1.125rem;
   cursor: pointer;
   width: 100%;
-  border: 3px solid black;
-  border-radius: 10px;
+  border: 0.1875rem solid black;
+  border-radius: 0.625rem;
 }
 
 .findPath {
   font-family: 'PrStart', sans-serif;
   font-size: 1rem;
   background-color: #7ed957;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 .reset {
   font-family: 'PrStart', sans-serif;
   background-color: #ff3131;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .controls button:hover,
@@ -190,7 +190,7 @@ label {
   filter: brightness(1.1);
   transform: scale(1.03);
   transition: all 0.2s ease-in-out;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0rem 0rem 0.625rem rgba(0, 0, 0, 0.3);
 }
 
 .speed select:hover,
@@ -198,7 +198,7 @@ label {
   filter: brightness(1.05);
   transform: scale(1.03);
   transition: all 0.2s ease-in-out;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0rem 0rem 0.3125rem rgba(0, 0, 0, 0.2);
 }
 
 .grid-pair {
@@ -212,13 +212,13 @@ label {
 
 .algoName {
   background-color: #ffe500;
-  border: 7px solid #6c5600;
-  border-radius: 10px;
-  padding: 10px 20px;
+  border: 0.4375rem solid #6c5600;
+  border-radius: 0.625rem;
+  padding: 0.625rem 1.25rem;
   font-size: 1.5rem;
   color: #000;
   width: fit-content;
-  margin: 10px auto;
+  margin: 0.625rem auto;
   user-select: none;
 }
 
@@ -249,10 +249,30 @@ label {
   font-family: 'PrStart', sans-serif;
   display: flex;
   z-index: 1;
-  padding: 30px;
+  padding: 1.875rem;
   gap: 0.5rem;
   color: #fff; 
   height: 85vh;
   justify-content: space-evenly;
   align-items: center;
+}
+
+
+
+
+
+
+@media (max-width: 1420px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 980px) {
+  .grid-pair {
+    display: flex;
+    flex-direction: column;
+  }
 }

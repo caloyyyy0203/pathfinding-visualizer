@@ -213,8 +213,9 @@ function App() {
       const aEnd = resetAStarGrid[endNode.row][endNode.col];
 
       const t0 = performance.now();
-      const { visitedNodesInOrder: dVisited, shortestPathNodes: dPath } =
-        dijkstra(resetDijkstraGrid, dStart, dEnd);
+      // const { visitedNodesInOrder: dVisited, shortestPathNodes: dPath } =
+      //   dijkstra(resetDijkstraGrid, dStart, dEnd);
+      const { visitedNodesInOrder: dVisited, shortestPathNodes: dPath, noPathFound } = dijkstra(resetDijkstraGrid, dStart, dEnd);
       const t1 = performance.now();
 
       const t2 = performance.now();
@@ -251,6 +252,9 @@ function App() {
 
       setTimeout(() => {
         setIsAnimating(false);
+        if (noPathFound) {
+          alert("No path found!");
+        }
       }, longestDuration);
     }, 0);
   };
