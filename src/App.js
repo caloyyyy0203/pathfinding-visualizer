@@ -11,8 +11,7 @@ const createEmptyGrid = (rows, cols) => {
     const currentRow = [];
     for (let col = 0; col < cols; col++) {
       currentRow.push({
-        row,
-        col,
+        row, col,
         isStart: false,
         isEnd: false,
         isWall: false,
@@ -175,7 +174,7 @@ function App() {
       window.animationTimeouts.forEach(clearTimeout);
       window.animationTimeouts = [];
     }
-    setIsAnimating(true); // 🔒 Block UI actions
+    setIsAnimating(true);
 
     const resetDijkstraGrid = gridDijkstra.map((row) =>
       row.map((cell) => ({
@@ -203,7 +202,7 @@ function App() {
 
       if (!startNode || !endNode) {
         alert("Please set start and end nodes!");
-        setIsAnimating(false); // 🔓 Unlock UI if no valid start/end
+        setIsAnimating(false);
         return;
       }
 
@@ -335,7 +334,6 @@ function App() {
       <div className="extraLayer">
         <video autoPlay loop muted className="background-video">
           <source src="/background.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
 
         <div className="app-container">
