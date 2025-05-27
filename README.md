@@ -60,8 +60,8 @@ The app will open at http://localhost:3000 by default.
 
 ---
 
-👨‍💻 Author
-Developed by Carl Wyndel Asoy
-University of the Philippines Cebu
-Course: CMSC 126 - Web Engineering
-Lab Activity 3
+## 👨‍💻 Author  
+Developed by Carl Wyndel Asoy  
+University of the Philippines Cebu  
+Course: CMSC 126 - Web Engineering  
+Lab Activity 3  
