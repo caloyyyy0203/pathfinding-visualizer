@@ -1,5 +1,3 @@
-// src/algorithms/astar.js
-
 export function aStar(grid, startNode, endNode) {
   const openSet = [];
   const closedSet = new Set();

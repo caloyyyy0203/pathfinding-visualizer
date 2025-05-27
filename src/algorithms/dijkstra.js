@@ -1,5 +1,3 @@
-// src/algorithms/dijkstra.js
-
 export function dijkstra(grid, startNode, endNode) {
   const visitedNodesInOrder = [];
   const unvisitedNodes = getAllNodes(grid);
@@ -15,8 +13,6 @@ export function dijkstra(grid, startNode, endNode) {
     // If wall, skip
     if (closestNode.isWall) continue;
 
-    // If distance is Infinity, we are trapped
-    // if (closestNode.distance === Infinity) return { visitedNodesInOrder, shortestPathNodes: [] };
     if (closestNode.distance === Infinity) {
       return { visitedNodesInOrder, shortestPathNodes: [], noPathFound: true };
     }

@@ -1,4 +1,3 @@
-import React from 'react';
 import './Node.css';
 
 const Node = ({ isWall, isStart, isEnd, isVisited, isPath, onClick, rows, cols }) => {

@@ -212,28 +212,24 @@ function App() {
       const aStart = resetAStarGrid[startNode.row][startNode.col];
       const aEnd = resetAStarGrid[endNode.row][endNode.col];
 
-      const t0 = performance.now();
-      // const { visitedNodesInOrder: dVisited, shortestPathNodes: dPath } =
-      //   dijkstra(resetDijkstraGrid, dStart, dEnd);
-      const { visitedNodesInOrder: dVisited, shortestPathNodes: dPath, noPathFound } = dijkstra(resetDijkstraGrid, dStart, dEnd);
-      const t1 = performance.now();
+      const {
+        visitedNodesInOrder: dVisited,
+        shortestPathNodes: dPath,
+        noPathFound,
+      } = dijkstra(resetDijkstraGrid, dStart, dEnd);
 
-      const t2 = performance.now();
       const { visitedNodesInOrder: aVisited, shortestPathNodes: aPath } = aStar(
         resetAStarGrid,
         aStart,
         aEnd
       );
-      const t3 = performance.now();
 
       setMetrics({
         dijkstra: {
-          visitCount: dVisited.length,
-          time: (t1 - t0).toFixed(2),
+          visitCount: dVisited.length
         },
         aStar: {
           visitCount: aVisited.length,
-          time: (t3 - t2).toFixed(2),
         },
       });
 
@@ -429,9 +425,11 @@ function App() {
                   }}
                   disabled={isAnimating}
                 >
-                  {Array.from({ length: 11 }, (_, i) => 10 + i).map(
-                    (n) => (<option key={n} value={n}>{n}</option>)
-                  )}
+                  {Array.from({ length: 11 }, (_, i) => 10 + i).map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
                 </select>
               </label>
 
@@ -445,9 +443,11 @@ function App() {
                   }}
                   disabled={isAnimating}
                 >
-                  {Array.from({ length: 11 }, (_, i) => 10 + i).map(
-                    (n) => (<option key={n} value={n}>{n}</option>)
-                  )}
+                  {Array.from({ length: 11 }, (_, i) => 10 + i).map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
                 </select>
               </label>
             </div>
@@ -459,7 +459,9 @@ function App() {
 
           <div className="grid-pair">
             <div>
-              <div className="algoName">Dijkstra's <br /> Algorithm</div>
+              <div className="algoName">
+                Dijkstra's <br /> Algorithm
+              </div>
               <Grid
                 grid={gridDijkstra}
                 onCellClick={handleCellClick}
@@ -469,7 +471,9 @@ function App() {
               />
             </div>
             <div>
-              <div className="algoName">A Star <br /> Algorithm</div>
+              <div className="algoName">
+                A Star <br /> Algorithm
+              </div>
               <Grid
                 grid={gridAStar}
                 onCellClick={handleCellClick}
