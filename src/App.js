@@ -3,6 +3,7 @@ import Grid from "./components/Grid";
 import "./App.css";
 import { dijkstra } from "./algorithms/dijkstra";
 import { aStar } from "./algorithms/astar";
+import BackgroundMusic from './bgm';
 
 const createEmptyGrid = (rows, cols) => {
   const grid = [];
@@ -35,6 +36,7 @@ function App() {
   const [rows, setRows] = useState(10);
   const [cols, setCols] = useState(10);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
   const speedMap = {
     Slow: 200,
@@ -48,6 +50,20 @@ function App() {
     setGridDijkstra(newGrid.map((row) => row.map((cell) => ({ ...cell }))));
     setGridAStar(newGrid.map((row) => row.map((cell) => ({ ...cell }))));
   }, [rows, cols]);
+
+  useEffect(() => {
+    const handleClick = () => {
+      setShowWelcome(false);
+    };
+
+    if (showWelcome) {
+      document.addEventListener('click', handleClick);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [showWelcome]);
 
   const handleCellClick = (row, col) => {
     const newGrid = grid.map((row) => row.map((cell) => ({ ...cell })));
@@ -335,6 +351,7 @@ function App() {
         <video autoPlay loop muted className="background-video">
           <source src="/background.mp4" type="video/mp4" />
         </video>
+        <BackgroundMusic />
 
         <div className="app-container">
           <div className="controls">
@@ -482,6 +499,15 @@ function App() {
             </div>
           </div>
         </div>
+
+        {showWelcome && (
+        <div className="welcome-overlay">
+          <div className="welcome-box">
+            <h2>Welcome to Pathfinding Visualizer</h2>
+            <p>Click anywhere to start</p>
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );
